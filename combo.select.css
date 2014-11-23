@@ -76,9 +76,16 @@
 .option-item {
   cursor: pointer; }
 
-.option-group, .option-disabled {
+.option-item:hover {
+  background: #ffc; }
+
+.option-group {
   background: #eee;
   cursor: text; }
+
+.option-disabled, .option-disabled:hover {
+  background: transparent;
+  font-weight: bold; }
 
 /**
  * Dropdown
@@ -103,9 +110,6 @@
   list-style: none;
   padding: 5px 10px;
   border-bottom: 1px #eee solid; }
-
-.combo-dropdown li:hover {
-  background: #ffc; }
 
 .combo-open .combo-dropdown {
   display: block; }

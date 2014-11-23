@@ -224,6 +224,10 @@
 
 			this.$el.on('change.select', $.proxy(this._change, this))
 
+			/* Select: focus */
+
+			this.$el.on('focus.select', $.proxy(this._focus, this))
+
 			/* Dropdown Arrow: click */
 
 			this.$container.on('click.arrow', '.'+this.settings.comboArrowClass , $.proxy(this._toggle, this))
@@ -265,7 +269,7 @@
 
 			/* Dropdown item: click */
 
-			this.$container.on('click.item', 'li', $.proxy(this._select, this))
+			this.$container.on('click.item', '.option-item', $.proxy(this._select, this))
 
 		},
 
@@ -524,12 +528,12 @@
 			}
 
 			return this._getAll()
-			.removeClass(this.settings.selectedClass)
-			.filter(function(){
+				.removeClass(this.settings.selectedClass)
+				.filter(function(){
 
-				return $(this).data('index') == selected
-			})
-			.addClass(this.settings.selectedClass)
+					return $(this).data('index') == selected
+				})
+				.addClass(this.settings.selectedClass)
 		
 		},
 
@@ -604,11 +608,10 @@
 			this.$container.trigger('comboselect:opened')						
 
 			this.opened = true
-
 			
 			/* Focus input field */
 
-			this.$input.focus();
+			setTimeout(function(){ self.$input.focus(); });
 
 			/* Highligh the items */
 
