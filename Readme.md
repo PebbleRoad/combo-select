@@ -48,5 +48,6 @@ Converts a select box into a searchable and keyboard friendly interface. Fallbac
 
 ## Todo
 * Support multiple select item
+* Optgroup and disabled `option` support
 * API to destroy/update
 * Unit tests
