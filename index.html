@@ -62,6 +62,15 @@
 <option value='12'>December</option>
 </select>
 
+<select id="year" name="year" style="width: 150px">
+  <script>
+  var myDate = new Date();
+  var year = myDate.getFullYear();
+  for(var i = 1900; i < year+1; i++){
+    document.write('<option value="'+i+'">'+i+'</option>');
+  }
+  </script>
+</select>
 
 <select class="js-select select-wide">
               <option value="">Select</option>

@@ -6,8 +6,19 @@ Converts a select box into a searchable and keyboard friendly interface. Fallbac
 * Mobile and Tablet friendly (fallbacks to native select)
 * Keyboard accessible
 * Easily to style
+* Data attribute support
+* Support both numeric and string data types in select
+* Supports implict `style` attributes
 
 ## How to use
+
+
+		<select data-theme="bootstrap">
+			<option value="">Select value</option>
+			<option>1</option>
+			<option>2</option>
+		</select>
+		/* Any data-* options can be added */
 
         $('select').comboSelect({
             comboClass         : 'combo-select', /* outer container class */
@@ -18,7 +29,9 @@ Converts a select box into a searchable and keyboard friendly interface. Fallbac
 			hoverClass         : 'option-hover', /* dropdown list hover class */
 			selectedClass      : 'option-selected', /* dropdown list selected class */
 			markerClass        : 'combo-marker', /* Search marker class */
-			maxHeight          : 200 /* Max height of dropdown */
+			maxHeight          : 200, /* Max height of dropdown */
+			themeClass         : '', /* Theme using external classes */
+			extendStyle		   : true /* Copy all inline styles from original select */
         })
 
 ### Markup after conversion

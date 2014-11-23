@@ -65,7 +65,8 @@
     left: -1px;
     top: -1px;
     width: 0;
-    height: 0; } }
+    height: 0;
+    margin: 0; } }
 .option-selected {
   background: #ffc; }
 

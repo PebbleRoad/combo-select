@@ -31,7 +31,9 @@
 			hoverClass         : 'option-hover',
 			selectedClass      : 'option-selected',
 			markerClass        : 'combo-marker',
-			maxHeight          : 200
+			themeClass         : '',
+			maxHeight          : 200,
+			extendStyle        : true
 		};
 
 		/**
@@ -71,15 +73,7 @@
 		 * @param {[Object]} options [Option object]
 		 */
 		function Plugin ( element, options ) {
-
-				/* Settings */
-
-				this.settings = $.extend( {}, defaults, options );
-
-				/* Defaults */
-
-				this._defaults = defaults;
-
+				
 				/* Name of the plugin */
 
 				this._name = pluginName;
@@ -91,6 +85,14 @@
 				/* Element */
 
 				this.$el = $(element)
+
+				/* Settings */
+
+				this.settings = $.extend( {}, defaults, options, this.$el.data() );
+
+				/* Defaults */
+
+				this._defaults = defaults;
 
 				/* Options */
 
@@ -134,7 +136,16 @@
 					 * Wrap the Select
 					 */
 
-					this.$container = this.$el.wrapAll('<div class="' + this.settings.comboClass + '" />').parent();
+					this.$container = this.$el.wrapAll('<div class="' + this.settings.comboClass + ' '+ this.settings.themeClass + '" />').parent();
+					
+					/**
+					 * Check if select has a width attribute
+					 */
+					if(this.settings.extendStyle && this.$el.attr('style')){
+
+						this.$container.attr('style', this.$el.attr("style"))
+						
+					}
 					
 
 					/**
