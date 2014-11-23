@@ -8,17 +8,17 @@
 
 // Expose plugin as an AMD module if AMD loader is present:
 (function (factory) {
-    'use strict';
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object' && typeof require === 'function') {
-        // Browserify
-        factory(require('jquery'));
-    } else {
-        // Browser globals
-        factory(jQuery);
-    }
+		'use strict';
+		if (typeof define === 'function' && define.amd) {
+				// AMD. Register as an anonymous module.
+				define(['jquery'], factory);
+		} else if (typeof exports === 'object' && typeof require === 'function') {
+				// Browserify
+				factory(require('jquery'));
+		} else {
+				// Browser globals
+				factory(jQuery);
+		}
 }(function ( $, undefined ) {
 
 		var pluginName = "comboSelect";
@@ -54,16 +54,16 @@
 		})(),
 
 		keys = {
-            ESC: 27,
-            TAB: 9,
-            RETURN: 13,
-            LEFT: 37,
-            UP: 38,
-            RIGHT: 39,
-            DOWN: 40,
-            ENTER: 13,
-            SHIFT: 16
-        };
+			ESC: 27,
+			TAB: 9,
+			RETURN: 13,
+			LEFT: 37,
+			UP: 38,
+			RIGHT: 39,
+			DOWN: 40,
+			ENTER: 13,
+			SHIFT: 16
+		};
 
 		/**
 		 * Constructor
@@ -114,7 +114,7 @@
 					this._construct();
 
 
-          			/* Add event bindings */          
+								/* Add event bindings */          
 
 					this._events();
 
@@ -230,26 +230,26 @@
 							plugin.$container.trigger('comboselect:close')
 
 						})
-		            });
+								});
 
 					/* Stop `event:click` bubbling */
 
-		            this.$container.on('click.comboselect', function(e){
-		            	e.stopPropagation();
-		            })
+								this.$container.on('click.comboselect', function(e){
+									e.stopPropagation();
+								})
 
 
-		            /* Input: keydown */
+								/* Input: keydown */
 
-		            this.$container.on('keydown', 'input', $.proxy(this._keydown, this))
+								this.$container.on('keydown', 'input', $.proxy(this._keydown, this))
 
-		            /* Input: keyup */
-		            
-		            this.$container.on('keyup', 'input', $.proxy(this._keyup, this))
+								/* Input: keyup */
+								
+								this.$container.on('keyup', 'input', $.proxy(this._keyup, this))
 
-		            /* Dropdown item: click */
+								/* Dropdown item: click */
 
-		            this.$container.on('click.item', 'li', $.proxy(this._select, this))
+								this.$container.on('click.item', 'li', $.proxy(this._select, this))
 
 				},
 
@@ -420,9 +420,9 @@
 						items = this._getAll();						
 						needle = $.trim(search).toLowerCase(),
 						reEscape = new RegExp('(\\' + ['/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\'].join('|\\') + ')', 'g'),
-                        pattern = '(' + search.replace(reEscape, '\\$1') + ')';
+												pattern = '(' + search.replace(reEscape, '\\$1') + ')';
 
-                    /**
+										/**
 					 * Unwrap all markers
 					 */
 					
@@ -650,24 +650,24 @@
 					 */
 					
 					var offsetTop,
-		                upperBound,
-		                lowerBound,
-		                heightDelta = item.outerHeight()
-		        
-		            offsetTop = item[0].offsetTop;
-		            
-		            upperBound = this.$dropdown.scrollTop();
+						upperBound,
+						lowerBound,
+						heightDelta = item.outerHeight()
+		
+					offsetTop = item[0].offsetTop;
+					
+					upperBound = this.$dropdown.scrollTop();
 
-		            lowerBound = upperBound + this.settings.maxHeight - heightDelta;
-		           	
-		            if (offsetTop < upperBound) {
-		                
-		                this.$dropdown.scrollTop(offsetTop);
+					lowerBound = upperBound + this.settings.maxHeight - heightDelta;
+					
+					if (offsetTop < upperBound) {
+							
+							this.$dropdown.scrollTop(offsetTop);
 
-		            } else if (offsetTop > lowerBound) {
-		                
-		                this.$dropdown.scrollTop(offsetTop - this.settings.maxHeight + heightDelta);
-		            }
+					} else if (offsetTop > lowerBound) {
+							
+							this.$dropdown.scrollTop(offsetTop - this.settings.maxHeight + heightDelta);
+					}
 
 				},
 		});
@@ -681,23 +681,24 @@
 
 				this.each(function() {
 
-						var $e = $(this),
-							instance = $e.data(dataKey)
+					var $e = $(this),
+						instance = $e.data(dataKey)
 
-						if (typeof options === 'string') {
-			                if (instance && typeof instance[options] === 'function') {
-			                    instance[options](args);
-			                }
+					if (typeof options === 'string') {
+						
+						if (instance && typeof instance[options] === 'function') {
+								instance[options](args);
+						}
 
-			            }else{
+					}else{
 
-			                if (instance && instance.dispose) {
-			                    instance.dispose();
-			                }
+						if (instance && instance.dispose) {
+								instance.dispose();
+						}
 
-			                $.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
+						$.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
 
-			            }
+					}
 
 				});
 
