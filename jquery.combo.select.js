@@ -87,6 +87,10 @@
 
 		this.$el = $(element)
 
+		/* If multiple select: stop */
+		
+		if(this.$el.prop('multiple')) return;
+
 		/* Settings */
 
 		this.settings = $.extend( {}, defaults, options, this.$el.data() );
