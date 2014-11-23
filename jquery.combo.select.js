@@ -179,7 +179,7 @@
 
 				if(e.nodeName.toLowerCase() == 'optgroup'){
 
-					return o+='<li class="option-group '+ self.settings.disabledClass+'">'+this.label+'</li>'
+					return o+='<li class="option-group">'+this.label+'</li>'
 				}
 
 				if(!e.value) p = e.innerHTML
@@ -215,6 +215,14 @@
 			/* Input: focus */
 
 			this.$container.on('focus.input', 'input', $.proxy(this._focus, this))
+
+			/**
+			 * Input: mouseup
+			 * For input select() event to function correctly
+			 */
+			this.$container.on('mouseup.input', 'input', function(e){
+				e.preventDefault()
+			})
 
 			/* Input: blur */
 
@@ -357,7 +365,7 @@
 
 			var items = this._getVisible(),
 				current = this._getHovered(),
-				index = current.prevAll().filter(':visible').length,
+				index = current.prevAll('.option-item').filter(':visible').length,
 				total = items.length
 
 			
@@ -389,7 +397,7 @@
 
 			var item = event.currentTarget? $(event.currentTarget) : $(event);
 
-			if(!item) return;
+			if(!item.length) return;
 
 			/**
 			 * 1. get Index
@@ -434,21 +442,29 @@
 		},
 		
 
-		_filter: function(search){					
+		_filter: function(search){
 
 			var self = this,
-				items = this._getAll();						
+				items = this._getAll();
 				needle = $.trim(search).toLowerCase(),
 				reEscape = new RegExp('(\\' + ['/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\'].join('|\\') + ')', 'g'),
-			pattern = '(' + search.replace(reEscape, '\\$1') + ')';
+				pattern = '(' + search.replace(reEscape, '\\$1') + ')';
 
-								/**
+
+			/**
 			 * Unwrap all markers
 			 */
 			
 			$('.'+self.settings.markerClass, items).contents().unwrap();
+
+			/* Search */
 			
-			if(needle){						
+			if(needle){
+
+				/* Hide Disabled and optgroups */
+
+				this.$items.filter('.option-group, .option-disabled').hide();
+			
 				
 				items							
 					.hide()
@@ -476,7 +492,8 @@
 					.show()
 			}else{
 
-				items.show();
+								
+				this.$items.show();
 			}
 
 			/* Open the comboselect */
@@ -543,7 +560,9 @@
 
 			if(!this.opened) this.$container.trigger('comboselect:open');
 			
-
+			/* Select the input */
+			
+			event && event.currentTarget && event.currentTarget.nodeName == 'INPUT' && event.currentTarget.select()
 		},
 
 		_blur: function(event){
@@ -611,7 +630,7 @@
 			
 			/* Focus input field */
 
-			setTimeout(function(){ self.$input.focus(); });
+			setTimeout(function(){ !self.$input.is(':focus') && self.$input.focus(); });
 
 			/* Highligh the items */
 

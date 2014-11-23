@@ -84,7 +84,8 @@
   cursor: text; }
 
 .option-disabled, .option-disabled:hover {
-  background: transparent;
+  background: #f8f8f8;
+  color: #aaa;
   font-weight: bold; }
 
 /**

@@ -47,7 +47,7 @@ Converts a select box into a searchable and keyboard friendly interface. Fallbac
     	</div>
 
 ## Todo
-* Support multiple select item
-* Optgroup and disabled `option` support
+* Support `multiple` and `size` attributes in select
+* Optgroup and disabled `option` support - Done
 * API to destroy/update
 * Unit tests
