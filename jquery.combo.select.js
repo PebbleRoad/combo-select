@@ -1,3 +1,4 @@
+/*jshint asi:true, expr:true */
 /**
  * Plugin Name: Combo Select
  * Author : Vinay@Pebbleroad
@@ -45,7 +46,7 @@
 		return {
 			sanitize: function(text){
 
-				return $.trim(text).toLowerCase()
+				return $.trim(text).toLowerCase();
 
 			},
 			escapeRegex: function(value){
@@ -104,7 +105,7 @@
 
 		/* Instances */
 
-		$.fn[ pluginName ]['instances'].push(this);
+		$.fn[ pluginName ].instances.push(this);
 
 	}
 
@@ -181,7 +182,7 @@
 
 				o+='<li class="'+(this.disabled? self.settings.disabledClass : "option-item") + ' ' +(k == self.selectedIndex? self.settings.selectedClass : '')+ '" data-index="'+(k)+'" data-value="'+this.value+'">'+ (this.innerHTML) + '</li>'
 
-				++k;
+				k++;
 			})
 
 			this.$dropdown.html(o)
@@ -641,7 +642,7 @@
 			this.$items.show();
 
 		},
-		_fixScroll: function(item){
+		_fixScroll: function(){
 	
 			/**
 			 * If dropdown is hidden
