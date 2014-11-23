@@ -32,3 +32,7 @@ Converts a select box into a searchable and keyboard friendly interface. Fallbac
     		</ul>
     		<input type="text" placeholder="Select Month" class="combobox-input text-input">
     	</div>
+
+## Todo
+* API to destroy/update
+* Unit tests
