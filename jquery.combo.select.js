@@ -419,11 +419,14 @@
 			 */
 			if(typeof index == 'undefined'){
 				
-				index = null
+				index = 0
 
 			}
+			
+			if(this.$el.prop('selectedIndex') != index){
 
-			this.$el.prop('selectedIndex', index).trigger('change');
+				this.$el.prop('selectedIndex', index).trigger('change');
+			}
 
 		},
 
@@ -577,7 +580,6 @@
 				val = $.trim(this.$input.val().toLowerCase()),
 				isNumber = !isNaN(val);
 			
-
 			var index = this.$options.filter(function(){
 				
 				if(isNumber){
@@ -589,7 +591,7 @@
 			}).prop('index')
 		
 			/* Select by Index */
-
+						
 			this._selectByIndex(index)
 			
 		},
