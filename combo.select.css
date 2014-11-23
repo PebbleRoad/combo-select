@@ -1,0 +1,113 @@
+@charset "UTF-8";
+* {
+  box-sizing: border-box; }
+
+.combo-select {
+  position: relative;
+  max-width: 300px;
+  border: #fff;
+  border: 2px #ddd solid;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  padding-right: 30px; }
+
+.combo-select .combo-input {
+  border: none;
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.combo-select .combo-input:focus {
+  outline: none; }
+
+.combo-arrow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 100%;
+  background: #eee;
+  cursor: pointer; }
+
+.combo-arrow:before {
+  content: "▼";
+  text-align: center;
+  width: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  color: #444;
+  font-size: 10px; }
+
+.combo-open .combo-arrow:before {
+  content: "▲"; }
+
+.combo-focus {
+  border-color: blue; }
+
+/**
+ * Select
+ */
+.combo-select select {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-appearance: none;
+  opacity: 0; }
+
+@media only screen and (min-width: 960px) {
+  .combo-select select {
+    left: -1px;
+    top: -1px;
+    width: 0;
+    height: 0; } }
+.option-selected {
+  background: #ffc; }
+
+.option-hover {
+  background: #ffc; }
+
+.option-item {
+  cursor: pointer; }
+
+.option-group, .option-disabled {
+  background: #eee;
+  cursor: text; }
+
+/**
+ * Dropdown
+ */
+.combo-dropdown {
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0;
+  min-width: 100%;
+  max-width: 300px;
+  margin: 0;
+  padding: 0;
+  border: 1px #ccc solid;
+  display: none;
+  max-height: 200px;
+  overflow: scroll;
+  background: #fff;
+  border-radius: 5px; }
+
+.combo-dropdown li {
+  list-style: none;
+  padding: 5px 10px;
+  border-bottom: 1px #eee solid; }
+
+.combo-dropdown li:hover {
+  background: #ffc; }
+
+.combo-open .combo-dropdown {
+  display: block; }
+
+.combo-marker {
+  font-weight: bold; }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="combo.select.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<form method="get">
+	<select name=dt required>
+    <option value="">Select day</option>
+<option value='01'>01</option>
+
+
+<option value='02'>02</option>
+<option value='03'>03</option>
+<option value='04'>04</option>
+<option value='05'>05</option>
+<option value='06'>06</option>
+<option value='07'>07</option>
+<option value='08'>08</option>
+<option value='09'>09</option>
+<option value='10'>10</option>
+<option value='11'>11</option>
+<option value='12'>12</option>
+<option value='13'>13</option>
+<option value='14'>14</option>
+<option value='15'>15</option>
+<option value='16'>16</option>
+<option value='17'>17</option>
+<option value='18'>18</option>
+<option value='19'>19</option>
+<option value='20'>20</option>
+<option value='21'>21</option>
+<option value='22'>22</option>
+<option value='23'>23</option>
+<option value='24'>24</option>
+<option value='25'>25</option>
+<option value='26'>26</option>
+<option value='27'>27</option>
+<option value='28'>28</option>
+<option value='29'>29</option>
+<option value='30'>30</option>
+<option value='31'>31</option>
+</select>
+
+	<select name=month required>
+	<option value=''>Select Month</option>
+<option value='01'>January</option>
+<option value='02'>February</option>
+<option value='03' selected>March</option>
+<option value='04'>April</option>
+<option value='05'>May</option>
+<option value='06'>June</option>
+<option value='07'>July</option>
+<option value='08'>August</option>
+<option value='09'>September</option>
+<option value='10'>October</option>
+<option value='11'>November</option>
+<option value='12'>December</option>
+</select>
+
+
+<select class="js-select select-wide">
+              <option value="">Select</option>
+              <option>on illegal practices under the Employment Act</option>
+              <option>on illegal employment or deployment of foreign workers</option>
+              <option>on false declaration of foreign workers' salary or qualification</option>
+              <option>on use of locals as 'Phantom Workers'</option>
+              <option>on unauthorised collection of money from foreign workers as condition of employment ('Kickbacks')</option>
+              <option>on any other breach of the Employment of Foreign Manpower Act or Work Pass Conditions (Example : Failure option to repatriate, medical obligation issues, etc.)</option>
+              <option>on unacceptable accomodation conditions for foreign workers </option>
+              <option>on the well-being issues of Foreign Domestic Worker (FDW)</option>
+              <option>against Employment Agency or unlicensed Employment Agency</option>
+              <option>about a workplace safety and health issue (infringement)</option>
+              <option>non-compliance with Employment Act and CPF Act</option>
+              <option>on a discriminatory job advertisement</option>
+              <option>on nationality based discrimination at workplacesoption </option>
+            </select>
+
+<button type="submit">Submit form</button>
+</form>
+	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="jquery.combo.select.js"></script>  
+	<script>
+		$(function(){
+
+			$('select')
+			.comboSelect()
+      
+		})
+	</script>
+</body>
+</html>
