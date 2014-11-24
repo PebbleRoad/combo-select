@@ -42,22 +42,7 @@
 	 * Utility functions
 	 */
 
-	var utils = (function(){
-
-		return {
-			sanitize: function(text){
-
-				return $.trim(text).toLowerCase();
-
-			},
-			escapeRegex: function(value){
-
-				return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-			}
-		}
-	})(),
-
-	keys = {
+	var keys = {
 		ESC: 27,
 		TAB: 9,
 		RETURN: 13,
@@ -372,7 +357,7 @@
 			
 
 		},
-		_move: function(dir, event){
+		_move: function(dir){
 
 			var items = this._getVisible(),
 				current = this._getHovered(),
@@ -441,7 +426,7 @@
 
 		},
 
-		_autofill: function(event){
+		_autofill: function(){
 
 			var item = this._getHovered();
 
@@ -591,7 +576,7 @@
 			event && event.currentTarget && event.currentTarget.nodeName == 'INPUT' && event.currentTarget.select()
 		},
 
-		_blur: function(event){
+		_blur: function(){
 
 			/**
 			 * 1. Get hovered item
@@ -599,8 +584,7 @@
 			 * 3. If none
 			 */
 			
-			var self = this,
-				val = $.trim(this.$input.val().toLowerCase()),
+			var val = $.trim(this.$input.val().toLowerCase()),
 				isNumber = !isNaN(val);
 			
 			var index = this.$options.filter(function(){
@@ -619,7 +603,7 @@
 			
 		},
 
-		_change: function(event){
+		_change: function(){
 
 
 			this._updateInput();
