@@ -22,7 +22,8 @@
 	}
 }(function ( $, undefined ) {
 
-	var pluginName = "comboSelect";
+	var pluginName = "comboSelect",
+		dataKey = 'comboselect';
 	var defaults = {			
 		comboClass         : 'combo-select',
 		comboArrowClass    : 'combo-arrow',
@@ -66,7 +67,8 @@
 		DOWN: 40,
 		ENTER: 13,
 		SHIFT: 16
-	};
+	},	
+	isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
 
 	/**
 	 * Constructor
@@ -133,9 +135,14 @@
 
 			/**
 			 * Add negative TabIndex to `select`
+			 * Preserves previous tabindex
 			 */
+			
+			this.$el.data('plugin_'+ dataKey + '_tabindex', this.$el.prop('tabindex'))
 
-			this.$el.attr("tabIndex", -1)
+			/* Add a tab index for desktop browsers */
+
+			!isMobile && this.$el.prop("tabIndex", -1)
 
 			/**
 			 * Wrap the Select
@@ -202,7 +209,7 @@
 			 * Append Input
 			 */
 
-			this.$input = $('<input type="text" placeholder="'+p+'" class="'+ this.settings.inputClass + '">').appendTo(this.$container)
+			this.$input = $('<input type="text"' + (isMobile? 'tabindex="-1"': '') + ' placeholder="'+p+'" class="'+ this.settings.inputClass + '">').appendTo(this.$container)
 
 			/* Update input text */
 
@@ -235,6 +242,10 @@
 			/* Select: focus */
 
 			this.$el.on('focus.select', $.proxy(this._focus, this))
+
+			/* Select: blur */
+
+			this.$el.on('blur.select', $.proxy(this._blurSelect, this))
 
 			/* Dropdown Arrow: click */
 
@@ -556,8 +567,20 @@
 				.addClass(this.settings.selectedClass)
 		
 		},
+		_blurSelect: function(){
 
+			this.$container.removeClass('combo-focus');
+
+		},
 		_focus: function(event){
+			
+			/* Toggle focus class */
+
+			this.$container.toggleClass('combo-focus', !this.opened);
+
+			/* If mobile: stop */
+			
+			if(isMobile) return;
 
 			/* Open combo */
 
@@ -659,7 +682,7 @@
 
 		_close: function(){				
 
-			this.$container.removeClass('combo-open')
+			this.$container.removeClass('combo-open combo-focus')
 
 			this.$container.trigger('comboselect:closed')
 
@@ -710,19 +733,56 @@
 			}
 
 		},
+		/**
+		 * Destroy API
+		 */
+		
+		dispose: function(){
+
+			/* Remove combo arrow, input, dropdown */
+
+			this.$arrow.remove()
+
+			this.$input.remove()
+
+			this.$dropdown.remove()
+
+			/* Remove tabindex property */
+			this.$el
+				.removeAttr("tabindex")
+
+			/* Check if there is a tabindex set before */
+
+			if(!!this.$el.data('plugin_'+ dataKey + '_tabindex')){
+				this.$el.prop('tabindex', this.$el.data('plugin_'+ dataKey + '_tabindex'))
+			}
+
+			/* Unwrap */
+
+			this.$el.unwrap()
+
+			/* Remove data */
+
+			this.$el.removeData('plugin_'+dataKey)
+
+			/* Remove tabindex data */
+
+			this.$el.removeData('plugin_'+dataKey + '_tabindex')
+
+		}
+
 	});
+
 
 
 	// A really lightweight plugin wrapper around the constructor,
 	// preventing against multiple instantiations
 	$.fn[ pluginName ] = function ( options ) {
 
-		var dataKey = 'comboselect';
-
 		this.each(function() {
 
 			var $e = $(this),
-				instance = $e.data(dataKey)
+				instance = $e.data('plugin_'+dataKey)
 
 			if (typeof options === 'string') {
 				
@@ -736,7 +796,7 @@
 						instance.dispose();
 				}
 
-				$.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
+				$.data( this, "plugin_" + dataKey, new Plugin( this, options ) );
 
 			}
 
