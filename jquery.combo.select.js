@@ -769,6 +769,10 @@
 
 			this.$el.removeData('plugin_'+dataKey + '_tabindex')
 
+			/* Remove change event on select */
+
+			this.$el.off('change.select focus.select blur.select');
+
 		}
 
 	});
@@ -777,7 +781,7 @@
 
 	// A really lightweight plugin wrapper around the constructor,
 	// preventing against multiple instantiations
-	$.fn[ pluginName ] = function ( options ) {
+	$.fn[ pluginName ] = function ( options, args ) {
 
 		this.each(function() {
 
