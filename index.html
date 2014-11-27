@@ -3,18 +3,31 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
 	<link rel="stylesheet" href="combo.select.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .demo-form{
+      padding: 15px;
+      margin: 20px auto;
+    }
+
+    @media only screen and (min-width: 960px){
+      .demo-form{
+        width: 500px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<form method="get">
+<form method="get" class=demo-form>
 	<select name=dt required>
     <option value="">Select day</option>
 <option value='01'>01</option>
 
 
-<option value='02' disabled>02</option>
+<option value='02' disabled>02 - Disabled</option>
 <optgroup label="Optgroup">
   <option value='03'>03</option>
   <option value='04'>04</option>
@@ -66,6 +79,7 @@
 </select>
 
 <select id="year" name="year" style="width: 150px">
+  <option value="">Year</option>
   <script>
   var myDate = new Date();
   var year = myDate.getFullYear();
