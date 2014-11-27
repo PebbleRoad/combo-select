@@ -10,6 +10,12 @@ Converts a select box into a searchable and keyboard friendly interface. Fallbac
 * Support both numeric and string data types in select
 * Supports implict `style` attributes
 
+## Browser support
+
+* Safari, Chrome, Firefox, Opera
+* iOS, Android, IE Mobile
+* Internet Explorer IE 8 and above
+
 ## How to use
 
 
@@ -49,5 +55,5 @@ Converts a select box into a searchable and keyboard friendly interface. Fallbac
 ## Todo
 * Support `multiple` and `size` attributes in select
 * Optgroup and disabled `option` support - Done
-* API to destroy/update
+* API to destroy/update - Done
 * Unit tests
