@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /**
  * Variables
  */
@@ -8,9 +7,10 @@
 .combo-select {
   position: relative;
   max-width: 400px;
-  border: #fff;
   margin-bottom: 15px;
-  font: 100% Helvetica, Arial, Sans-serif; }
+  font: 100% Helvetica, Arial, Sans-serif;
+  border: 1px #ccc solid;
+  border-radius: 3px; }
   .combo-select .combo-input {
     margin-bottom: 0; }
 
@@ -24,12 +24,14 @@
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
-  border: 1px #999 solid;
+  border: none;
   width: 100%;
   box-sizing: border-box;
-  padding: 0.6em 1em;
+  padding: 12px;
   padding-right: 60px;
-  border-radius: 0; }
+  border-radius: 3px; }
+  .combo-input:focus {
+    outline: none; }
 
 /**
  * Arrow
@@ -44,14 +46,20 @@
   font-size: 14px;
   width: 40px;
   font-size: 12px;
-  color: #999;
-  border-left: 1px #999 solid; }
+  color: #999999; }
   .combo-arrow:before {
-    content: "▼";
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0;
-    line-height: 40px; }
+    content: " ";
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #cccccc;
+    display: block;
+    width: 0;
+    height: 0;
+    top: 0;
+    right: 15px;
+    bottom: 0;
+    position: absolute;
+    margin: auto 0; }
 
 /**
  * When opened
@@ -59,7 +67,8 @@
 .combo-open .combo-arrow {
   border-color: #51A7E8; }
   .combo-open .combo-arrow:before {
-    content: "▲"; }
+    border-top: none;
+    border-bottom: 5px solid #cccccc; }
 
 /**
  * When focused
@@ -81,8 +90,7 @@
   width: 100%;
   height: 100%;
   -webkit-appearance: none;
-  opacity: 0;
-  filter: alpha(opacity=0); }
+  opacity: 0; }
 
 @media only screen and (min-width: 960px) {
   .combo-select select {
@@ -148,7 +156,7 @@
   display: none;
   overflow-y: auto;
   background: #fff;
-  border: 1px solid #999;
+  border: 1px solid #999999;
   border-radius: 0;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   box-sizing: border-box; }
@@ -168,5 +176,3 @@
  */
 .combo-marker {
   text-decoration: underline; }
-
-/*# sourceMappingURL=combo.select.css.map */

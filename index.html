@@ -62,7 +62,7 @@
 <option value='31'>31</option>
 </select>
 
-	<select name=month required>
+	<select>
 	<option value=''>Select Month</option>
 <option value='01'>January</option>
 <option value='02'>February</option>
@@ -89,7 +89,7 @@
   </script>
 </select>
 
-<select class="js-select select-wide">
+<select>
               <option value="">Select</option>
               <option>on illegal practices under the Employment Act</option>
               <option>on illegal employment or deployment of foreign workers</option>
@@ -106,7 +106,56 @@
               <option>on nationality based discrimination at workplacesoption </option>
             </select>
 
-<button type="submit">Submit form</button>
+<h3>Option groups</h3>
+
+<select>
+  <option>Option 1</option>
+  <optgroup label="Group 1">
+    <option>Option</option>
+    <option>Option</option>
+  </optgroup>
+  <optgroup label="Group 2">
+    <option>Option</option>
+    <option>Option</option>
+  </optgroup>
+</select>
+
+<h3>on Change event</h3>
+
+<select class="js-select">
+  <option value="">Select an option</option>
+  <option>Option 1</option>
+  <option>Option 2</option>
+  <option>Option 3</option>
+  <option>Option 4</option>
+  <option>Option 5</option>
+  <option>Option 6</option>
+</select>
+
+<div class="selected">
+  <p>Selected Index: <span class="idx"></span></p>
+  <p>Selected Value: <span class="val"></span></p>
+</div>
+
+<pre>
+  <code>
+$('select').change(function(event){
+    console.log(event.target.selectedIndex)
+    console.log(event.target.value)
+})
+  </code>
+</pre>
+
+
+<h3>Trigger Handlers</h3>
+
+<ul>
+  <li>ComboSelect Open : <pre>comboselect:opened</pre>: <a href="#" class="js-select-open">Open select</a></li>
+  <li>ComboSelect Open : <pre>comboselect:close</pre>: <a href="#" class="js-select-close">Close select</a></li>
+  <li>All other events will work as normal: Hover, focus, Blur</li>
+</ul>
+
+
 </form>
 	
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -116,6 +165,33 @@
 
 			$('select')
 			.comboSelect()
+
+      /**
+       * on Change
+       */
+      
+      $('.js-select').change(function(e, v){
+          $('.idx').text(e.target.selectedIndex)
+          $('.val').text(e.target.value)
+      })
+
+      /**
+       * Open select
+       */
+      
+      $('.js-select-open').click(function(e){
+        $('.js-select').focus()
+        e.preventDefault();
+      })
+
+      /**
+       * Open select
+       */
+      
+      $('.js-select-close').click(function(e){
+        $('.js-select').trigger('comboselect:close')
+        e.preventDefault();
+      })
       
 		})
 	</script>

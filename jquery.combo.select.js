@@ -35,7 +35,8 @@
 		markerClass        : 'combo-marker',
 		themeClass         : '',
 		maxHeight          : 200,
-		extendStyle        : true
+		extendStyle        : true,
+		focusInput         : true
 	};
 
 	/**
@@ -573,7 +574,7 @@
 			
 			/* Select the input */
 			
-			event && event.currentTarget && event.currentTarget.nodeName == 'INPUT' && event.currentTarget.select()
+			this.settings.focusInput && event && event.currentTarget && event.currentTarget.nodeName == 'INPUT' && event.currentTarget.select()
 		},
 
 		_blur: function(){
@@ -631,15 +632,13 @@
 
 			var self = this
 
-			this.$container.addClass('combo-open')
-
-			this.$container.trigger('comboselect:opened')						
+			this.$container.addClass('combo-open')			
 
 			this.opened = true
 			
-			/* Focus input field */
+			/* Focus input field */			
 
-			setTimeout(function(){ !self.$input.is(':focus') && self.$input.focus(); });
+			this.settings.focusInput && setTimeout(function(){ !self.$input.is(':focus') && self.$input.focus(); });
 
 			/* Highligh the items */
 
@@ -757,8 +756,7 @@
 
 			this.$el.off('change.select focus.select blur.select');
 
-		}
-
+		}	
 	});
 
 
