@@ -181,7 +181,11 @@
 
 			var p = '';
 
-			this.$options.each(function(idx, e){
+			this.$options.filter(function(idx, opt){
+				
+				return opt.nodeName == 'OPTION'
+			}).each(function(idx, e){
+				
 				if(!e.value) p = e.innerHTML
 			});
 
