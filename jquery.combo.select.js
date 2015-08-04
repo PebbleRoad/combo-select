@@ -162,11 +162,36 @@
 
 			/**
 			 * Create dropdown options
+			 */			
+			
+			this._build();
+
+			/**
+			 * Append Input
 			 */
 
-			var o = '', k = 0, p = '';
+			this.$input = $('<input type="text"' + (isMobile? 'tabindex="-1"': '') + ' placeholder="'+ this.getPlaceholder() +'" class="'+ this.settings.inputClass + '">').appendTo(this.$container)
 
-			this.selectedIndex = this.$el.prop('selectedIndex')
+			/* Update input text */
+
+			this._updateInput()
+
+		},
+		getPlaceholder: function(){
+
+			var p = '';
+
+			this.$options.each(function(idx, e){
+				if(!e.value) p = e.innerHTML
+			});
+
+			return p
+		},
+		_build: function(){
+
+			var self = this;
+
+			var o = '', k = 0;
 
 			this.$options.each(function(i, e){
 
@@ -174,10 +199,8 @@
 
 					return o+='<li class="option-group">'+this.label+'</li>'
 				}
-
-				if(!e.value) p = e.innerHTML
-
-				o+='<li class="'+(this.disabled? self.settings.disabledClass : "option-item") + ' ' +(k == self.selectedIndex? self.settings.selectedClass : '')+ '" data-index="'+(k)+'" data-value="'+this.value+'">'+ (this.innerHTML) + '</li>'
+				
+				o+='<li class="'+(this.disabled? self.settings.disabledClass : "option-item") + ' ' +(k == self.$el.prop('selectedIndex')? self.settings.selectedClass : '')+ '" data-index="'+(k)+'" data-value="'+this.value+'">'+ (this.innerHTML) + '</li>'
 
 				k++;
 			})
@@ -189,18 +212,6 @@
 			 */
 
 			this.$items = this.$dropdown.children();
-
-
-			/**
-			 * Append Input
-			 */
-
-			this.$input = $('<input type="text"' + (isMobile? 'tabindex="-1"': '') + ' placeholder="'+p+'" class="'+ this.settings.inputClass + '">').appendTo(this.$container)
-
-			/* Update input text */
-
-			this._updateInput()
-
 		},
 
 		_events: function(){
@@ -244,6 +255,10 @@
 			/* Dropdown: open */
 
 			this.$container.on('comboselect:open', $.proxy(this._open, this))
+
+			/* Dropdown: update */
+
+			this.$container.on('comboselect:update', $.proxy(this._update, this));
 
 
 			/* HTML Click */
@@ -397,14 +412,18 @@
 			if(!item.length) return;
 
 			/**
-			 * 1. get Index
-			 */
-			
-			var index = item.data('index');
+             * 1. get Index
+             */
+            
+            var index = item.data('index');
 
-			this._selectByIndex(index);
+            this._selectByIndex(index);
 
-			this.$container.trigger('comboselect:close')					
+            //this.$container.trigger('comboselect:close')                    
+
+            this.$input.focus();
+
+            this.$container.trigger('comboselect:close');					
 
 		},
 
@@ -716,6 +735,19 @@
 			}
 
 		},
+		/**
+		 * Update API
+		 */
+		
+		_update: function(){
+
+			this.$options = this.$el.find('option, optgroup')
+
+			this.$dropdown.empty();			
+
+			this._build();
+		},
+		
 		/**
 		 * Destroy API
 		 */

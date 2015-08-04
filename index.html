@@ -120,9 +120,9 @@
   </optgroup>
 </select>
 
-<h3>on Change event</h3>
+<h3>on Change event : <a href="#" class="js-select-add">Add new option</a></h3>
 
-<select class="js-select">
+<select class="js-select js-select-3">
   <option value="">Select an option</option>
   <option>Option 1</option>
   <option>Option 2</option>
@@ -152,6 +152,7 @@ $('select').change(function(event){
 <ul>
   <li>ComboSelect Open : <pre>comboselect:opened</pre>: <a href="#" class="js-select-open">Open select</a></li>
   <li>ComboSelect Open : <pre>comboselect:close</pre>: <a href="#" class="js-select-close">Close select</a></li>
+  <li>ComboSelect Update: <pre>comboselect:update</pre>: <a href="#" class="js-select-add">Add new option</a></li>
   <li>All other events will work as normal: Hover, focus, Blur</li>
 </ul>
 
@@ -191,6 +192,20 @@ $('select').change(function(event){
       $('.js-select-close').click(function(e){
         $('.js-select').trigger('comboselect:close')
         e.preventDefault();
+      })
+
+      /**
+       * Add new options
+       */
+      
+      var $select = $('.js-select-3');
+
+      $('.js-select-add').click(function(){
+        $select.prepend($('<option>', {
+          text: 'A new option: ' + Math.floor(Math.random() * 10) + 1  
+        })).trigger('comboselect:update')
+
+        return false;
       })
       
 		})
