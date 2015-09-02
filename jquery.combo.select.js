@@ -181,7 +181,11 @@
 
 			var p = '';
 
-			this.$options.each(function(idx, e){
+			this.$options.filter(function(idx, opt){
+				
+				return opt.nodeName == 'OPTION'
+			}).each(function(idx, e){
+				
 				if(!e.value) p = e.innerHTML
 			});
 
@@ -553,7 +557,7 @@
 			
 			if(this.$el.val()){
 				
-				text = this.$el.find('option').eq(selected).text()
+				text = this.$el.find('option').eq(selected).html()
 
 				this.$input.val(text)
 
