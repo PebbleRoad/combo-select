@@ -186,7 +186,7 @@
 				return opt.nodeName == 'OPTION'
 			}).each(function(idx, e){
 				
-				if(!e.value) p = e.innerHTML
+				if(e.value == '') p = e.innerHTML
 			});
 
 			return p
