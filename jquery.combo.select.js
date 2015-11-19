@@ -557,7 +557,7 @@
 			
 			if(this.$el.val()){
 				
-				text = this.$el.find('option').eq(selected).html()
+				text = this.$el.find('option').eq(selected).text()
 
 				this.$input.val(text)
 
@@ -612,12 +612,14 @@
 				isNumber = !isNaN(val);
 			
 			var index = this.$options.filter(function(){
+				return this.nodeName == 'OPTION'
+			}).filter(function(){
 				
-				if(isNumber){
-					return parseInt($.trim(this.innerHTML).toLowerCase()) == val
+				if(isNumber){		
+					return parseInt($.trim(this.innerText).toLowerCase()) == val
 				}
 
-				return $.trim(this.innerHTML).toLowerCase() == val
+				return $.trim(this.innerText).toLowerCase() == val
 
 			}).prop('index')
 		
