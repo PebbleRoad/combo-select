@@ -1,0 +1,18 @@
+{
+  "name": "PRComboSelect",
+  "version": "0.0.1",
+  "description": "Converts a select box into a searchable and keyboard friendly interface. Fallbacks to native select on mobile and ipad devices.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PebbleRoad/combo-select.git"
+  },
+  "keywords": [
+    "combo-select"
+  ],
+  "author": "Vinay M <rmdort@gmail.com> (http://github.com/rmdort)",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/PebbleRoad/combo-select/issues"
+  },
+  "homepage": "https://github.com/PebbleRoad/combo-select"
+}
