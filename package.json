@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/PebbleRoad/combo-select.git"
   },
+  "main": "jquery.combo.select.js",
   "keywords": [
     "combo-select"
   ],
