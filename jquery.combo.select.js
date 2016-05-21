@@ -3,7 +3,7 @@
  * Plugin Name: Combo Select
  * Author : Vinay@Pebbleroad
  * Date: 23/11/2014
- * Description: 
+ * Description:
  * Converts a select box into a searchable and keyboard friendly interface. Fallbacks to native select on mobile and tablets
  */
 
@@ -24,7 +24,7 @@
 
 	var pluginName = "comboSelect",
 		dataKey = 'comboselect';
-	var defaults = {			
+	var defaults = {
 		comboClass         : 'combo-select',
 		comboArrowClass    : 'combo-arrow',
 		comboDropDownClass : 'combo-dropdown',
@@ -53,7 +53,7 @@
 		DOWN: 40,
 		ENTER: 13,
 		SHIFT: 16
-	},	
+	},
 	isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
 
 	/**
@@ -62,7 +62,7 @@
 	 * @param {[Object]} options [Option object]
 	 */
 	function Plugin ( element, options ) {
-			
+
 		/* Name of the plugin */
 
 		this._name = pluginName;
@@ -76,7 +76,7 @@
 		this.$el = $(element)
 
 		/* If multiple select: stop */
-		
+
 		if(this.$el.prop('multiple')) return;
 
 		/* Settings */
@@ -109,7 +109,7 @@
 			this._construct();
 
 
-			/* Add event bindings */          
+			/* Add event bindings */
 
 			this._events();
 
@@ -123,7 +123,7 @@
 			 * Add negative TabIndex to `select`
 			 * Preserves previous tabindex
 			 */
-			
+
 			this.$el.data('plugin_'+ dataKey + '_tabindex', this.$el.prop('tabindex'))
 
 			/* Add a tab index for desktop browsers */
@@ -135,16 +135,16 @@
 			 */
 
 			this.$container = this.$el.wrapAll('<div class="' + this.settings.comboClass + ' '+ this.settings.themeClass + '" />').parent();
-			
+
 			/**
 			 * Check if select has a width attribute
 			 */
 			if(this.settings.extendStyle && this.$el.attr('style')){
 
 				this.$container.attr('style', this.$el.attr("style"))
-				
+
 			}
-			
+
 
 			/**
 			 * Append dropdown arrow
@@ -162,8 +162,8 @@
 
 			/**
 			 * Create dropdown options
-			 */			
-			
+			 */
+
 			this._build();
 
 			/**
@@ -182,10 +182,10 @@
 			var p = '';
 
 			this.$options.filter(function(idx, opt){
-				
+
 				return opt.nodeName == 'OPTION'
 			}).each(function(idx, e){
-				
+
 				if(e.value == '') p = e.innerHTML
 			});
 
@@ -203,7 +203,7 @@
 
 					return o+='<li class="option-group">'+this.label+'</li>'
 				}
-				
+
 				o+='<li class="'+(this.disabled? self.settings.disabledClass : "option-item") + ' ' +(k == self.$el.prop('selectedIndex')? self.settings.selectedClass : '')+ '" data-index="'+(k)+'" data-value="'+this.value+'">'+ (this.innerHTML) + '</li>'
 
 				k++;
@@ -268,7 +268,7 @@
 			/* HTML Click */
 
 			$('html').off('click.comboselect').on('click.comboselect', function(){
-				
+
 				$.each($.fn[ pluginName ].instances, function(i, plugin){
 
 					plugin.$container.trigger('comboselect:close')
@@ -288,7 +288,7 @@
 			this.$container.on('keydown', 'input', $.proxy(this._keydown, this))
 
 			/* Input: keyup */
-			
+
 			this.$container.on('keyup', 'input', $.proxy(this._keyup, this))
 
 			/* Dropdown item: click */
@@ -299,7 +299,7 @@
 
 		_keydown: function(event){
 
-			
+
 
 			switch(event.which){
 
@@ -310,7 +310,7 @@
 				case keys.DOWN:
 					this._move('down', event)
 					break;
-				
+
 				case keys.TAB:
 					this._enter(event)
 					break;
@@ -323,19 +323,19 @@
 					this._enter(event);
 					break;
 
-				default:							
+				default:
 					break;
 
 
 			}
 
 		},
-		
+
 
 		_keyup: function(event){
-			
+
 			switch(event.which){
-				case keys.ESC:													
+				case keys.ESC:
 					this.$container.trigger('comboselect:close')
 					break;
 
@@ -345,15 +345,15 @@
 				case keys.LEFT:
 				case keys.RIGHT:
 				case keys.TAB:
-				case keys.SHIFT:							
+				case keys.SHIFT:
 					break;
-				
-				default:							
+
+				default:
 					this._filter(event.target.value)
 					break;
 			}
 		},
-		
+
 		_enter: function(event){
 
 			var item = this._getHovered()
@@ -364,7 +364,7 @@
 			if(event && event.which == keys.ENTER){
 
 				if(!item.length) {
-					
+
 					/* Check if its illegal value */
 
 					this._blur();
@@ -374,7 +374,7 @@
 
 				event.preventDefault();
 			}
-			
+
 
 		},
 		_move: function(dir){
@@ -384,20 +384,20 @@
 				index = current.prevAll('.option-item').filter(':visible').length,
 				total = items.length
 
-			
+
 			switch(dir){
 				case 'up':
 					index--;
 					(index < 0) && (index = (total - 1));
 					break;
 
-				case 'down':							
+				case 'down':
 					index++;
-					(index >= total) && (index = 0);							
+					(index >= total) && (index = 0);
 					break;
 			}
 
-			
+
 			items
 				.removeClass(this.settings.hoverClass)
 				.eq(index)
@@ -418,16 +418,16 @@
 			/**
              * 1. get Index
              */
-            
+
             var index = item.data('index');
 
             this._selectByIndex(index);
 
-            //this.$container.trigger('comboselect:close')                    
+            //this.$container.trigger('comboselect:close')
 
             this.$input.focus();
 
-            this.$container.trigger('comboselect:close');					
+            this.$container.trigger('comboselect:close');
 
 		},
 
@@ -438,11 +438,11 @@
 			 * @type {[type]}
 			 */
 			if(typeof index == 'undefined'){
-				
+
 				index = 0
 
 			}
-			
+
 			if(this.$el.prop('selectedIndex') != index){
 
 				this.$el.prop('selectedIndex', index).trigger('change');
@@ -463,7 +463,7 @@
 			}
 
 		},
-		
+
 
 		_filter: function(search){
 
@@ -477,36 +477,36 @@
 			/**
 			 * Unwrap all markers
 			 */
-			
+
 			$('.'+self.settings.markerClass, items).contents().unwrap();
 
 			/* Search */
-			
+
 			if(needle){
 
 				/* Hide Disabled and optgroups */
 
 				this.$items.filter('.option-group, .option-disabled').hide();
-			
-				
-				items							
+
+
+				items
 					.hide()
 					.filter(function(){
 
 						var $this = $(this),
 							text = $.trim($this.text()).toLowerCase();
-						
+
 						/* Found */
 						if(text.toString().indexOf(needle) != -1){
-																
+
 							/**
 							 * Wrap the selection
-							 */									
-							
+							 */
+
 							$this
 								.html(function(index, oldhtml){
 								return oldhtml.replace(new RegExp(pattern, 'gi'), '<span class="'+self.settings.markerClass+'">$1</span>')
-							})									
+							})
 
 							return true
 						}
@@ -515,30 +515,30 @@
 					.show()
 			}else{
 
-								
+
 				this.$items.show();
 			}
 
 			/* Open the comboselect */
 
 			this.$container.trigger('comboselect:open')
-			
+
 
 		},
 
 		_highlight: function(){
 
-			/* 
-			1. Check if there is a selected item 
+			/*
+			1. Check if there is a selected item
 			2. Add hover class to it
 			3. If not add hover class to first item
 			*/
-		
+
 			var visible = this._getVisible().removeClass(this.settings.hoverClass),
 				$selected = visible.filter('.'+this.settings.selectedClass)
 
 			if($selected.length){
-				
+
 				$selected.addClass(this.settings.hoverClass);
 
 			}else{
@@ -554,15 +554,15 @@
 		_updateInput: function(){
 
 			var selected = this.$el.prop('selectedIndex')
-			
+
 			if(this.$el.val()){
-				
+
 				text = this.$el.find('option').eq(selected).text()
 
 				this.$input.val(text)
 
 			}else{
-				
+
 				this.$input.val('')
 
 			}
@@ -574,7 +574,7 @@
 					return $(this).data('index') == selected
 				})
 				.addClass(this.settings.selectedClass)
-		
+
 		},
 		_blurSelect: function(){
 
@@ -582,21 +582,21 @@
 
 		},
 		_focus: function(event){
-			
+
 			/* Toggle focus class */
 
 			this.$container.toggleClass('combo-focus', !this.opened);
 
 			/* If mobile: stop */
-			
+
 			if(isMobile) return;
 
 			/* Open combo */
 
 			if(!this.opened) this.$container.trigger('comboselect:open');
-			
+
 			/* Select the input */
-			
+
 			this.settings.focusInput && event && event.currentTarget && event.currentTarget.nodeName == 'INPUT' && event.currentTarget.select()
 		},
 
@@ -607,26 +607,26 @@
 			 * 2. If not check if input value == select option
 			 * 3. If none
 			 */
-			
+
 			var val = $.trim(this.$input.val().toLowerCase()),
 				isNumber = !isNaN(val);
-			
+
 			var index = this.$options.filter(function(){
 				return this.nodeName == 'OPTION'
 			}).filter(function(){
-				
-				if(isNumber){		
-					return parseInt($.trim(this.innerText).toLowerCase()) == val
+				var _text = this.innerText || this.textContent
+				if(isNumber){
+					return parseInt($.trim(_text).toLowerCase()) == val
 				}
 
-				return $.trim(this.innerText).toLowerCase() == val
+				return $.trim(_text).toLowerCase() == val
 
 			}).prop('index')
-		
+
 			/* Select by Index */
-						
+
 			this._selectByIndex(index)
-			
+
 		},
 
 		_change: function(){
@@ -657,11 +657,11 @@
 
 			var self = this
 
-			this.$container.addClass('combo-open')			
+			this.$container.addClass('combo-open')
 
 			this.opened = true
-			
-			/* Focus input field */			
+
+			/* Focus input field */
 
 			this.settings.focusInput && setTimeout(function(){ !self.$input.is(':focus') && self.$input.focus(); });
 
@@ -688,7 +688,7 @@
 			this.opened? this._close.call(this) : this._open.call(this)
 		},
 
-		_close: function(){				
+		_close: function(){
 
 			this.$container.removeClass('combo-open combo-focus')
 
@@ -702,41 +702,41 @@
 
 		},
 		_fixScroll: function(){
-	
+
 			/**
 			 * If dropdown is hidden
 			 */
 			if(this.$dropdown.is(':hidden')) return;
 
-			
+
 			/**
-			 * Else					 
+			 * Else
 			 */
 			var item = this._getHovered();
 
-			if(!item.length) return;					
+			if(!item.length) return;
 
 			/**
 			 * Scroll
 			 */
-			
+
 			var offsetTop,
 				upperBound,
 				lowerBound,
 				heightDelta = item.outerHeight()
 
 			offsetTop = item[0].offsetTop;
-			
+
 			upperBound = this.$dropdown.scrollTop();
 
 			lowerBound = upperBound + this.settings.maxHeight - heightDelta;
-			
+
 			if (offsetTop < upperBound) {
-					
+
 				this.$dropdown.scrollTop(offsetTop);
 
 			} else if (offsetTop > lowerBound) {
-					
+
 				this.$dropdown.scrollTop(offsetTop - this.settings.maxHeight + heightDelta);
 			}
 
@@ -744,20 +744,20 @@
 		/**
 		 * Update API
 		 */
-		
+
 		_update: function(){
 
 			this.$options = this.$el.find('option, optgroup')
 
-			this.$dropdown.empty();			
+			this.$dropdown.empty();
 
 			this._build();
 		},
-		
+
 		/**
 		 * Destroy API
 		 */
-		
+
 		dispose: function(){
 
 			/* Remove combo arrow, input, dropdown */
@@ -794,7 +794,7 @@
 
 			this.$el.off('change.select focus.select blur.select');
 
-		}	
+		}
 	});
 
 
@@ -809,7 +809,7 @@
 				instance = $e.data('plugin_'+dataKey)
 
 			if (typeof options === 'string') {
-				
+
 				if (instance && typeof instance[options] === 'function') {
 						instance[options](args);
 				}
