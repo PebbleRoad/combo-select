@@ -170,7 +170,12 @@
 			 * Append Input
 			 */
 
-			this.$input = $('<input type="text"' + (isMobile? 'tabindex="-1"': '') + ' placeholder="'+ this.getPlaceholder() +'" class="'+ this.settings.inputClass + '">').appendTo(this.$container)
+			var elId = this.$el.attr('id')
+
+      /* Remove id */
+      this.$el.removeAttr('id')
+
+      this.$input = $('<input type="text"' + (isMobile? 'tabindex="-1"': '') + ' placeholder="'+ this.getPlaceholder() +'" class="'+ this.settings.inputClass + '" id="' + elId + '">').appendTo(this.$container)
 
 			/* Update input text */
 
