@@ -1,6 +1,6 @@
 {
   "name": "prcomboselect",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Converts a select box into a searchable and keyboard friendly interface. Fallbacks to native select on mobile and ipad devices.",
   "repository": {
     "type": "git",
